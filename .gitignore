@@ -1,0 +1,24 @@
+# Dépendances Node
+node_modules/
+**/node_modules/
+
+# Variables d'environnement (contient les mots de passe)
+.env
+**/.env
+
+# Fichiers de build
+dist/
+build/
+.output/
+
+# Fichiers temporaires AdonisJS
+tmp/
+**/.adonisjs/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
