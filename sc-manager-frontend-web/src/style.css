@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+/* Couleurs identité visuelle Sport Club Manager */
+:root {
+  --teal: #008080;
+  --deep-teal: #003333;
+  --teal-indigo: #4A648C;
+  --teal-blue: #367588;
+}
