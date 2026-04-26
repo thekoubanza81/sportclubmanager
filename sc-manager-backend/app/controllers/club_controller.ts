@@ -16,10 +16,19 @@ export default class ClubController {
   }
 
   // POST /api/v1/clubs — Créer un club
-  async store({ request, response }: HttpContext) {
-    const data = request.only([
-      'clubNomLong', 'clubNomCourt', 'description', 'creationDate'
-    ])
+async store({ request, response }: HttpContext) {
+  const data = request.only([
+    'clubNomLong', 'clubNomCourt', 'description', 'creationDate'
+  ])
+
+  // Vérifier si un club avec le même nom existe déjà
+  const existingClub = await Club.findBy('club_nom_long', data.clubNomLong)
+  if (existingClub) {
+    return response.conflict({
+      error: 'Un club avec ce nom existe déjà'
+    })
+  }
+
     const club = await Club.create({
       clubNomLong: data.clubNomLong,
       clubNomCourt: data.clubNomCourt,
@@ -29,7 +38,6 @@ export default class ClubController {
     })
     return response.created(club)
   }
-
   // PUT /api/v1/clubs/:id — Modifier un club
   async update({ params, request, response }: HttpContext) {
     const club = await Club.find(params.id)
